@@ -12,20 +12,11 @@ In short, PaymentKit should greatly simplify your life when dealing with iOS pay
 
 *For purchases related to the app, such as premium features, Apple's TOS require that you use their native In-App Purchase API. PaymentKits is only for purchasing products or services outside the app.*
 
-# Changes from stripe/PaymentKit
+# Changes from lmcd/LMPaymentKit
 
-* PKView can now be any size, with subviews laid out accordingly
-* Updated assets for all the different card types
-* UIResponder methods have been implemented
-* Fix for Diner's Club cards being unrecognised
-* Fix incorrect validation of AMEX CVC numbers
-* The look and feel of PKView has been updated to reflect the design of iOS 7
-* Lots of optimisations, cleanups and code modernization
-* A storyboard is now used in the example project
-* .gitignore is now useful!
-* PKView delegate is now notified when a field/state change occurs. This is useful for implementing helper labels
-* Can now set borderStyle of a PKView
-* Can now set the defaultTextAttributes of a PKView
+* New PKCardTypes: PKCardTypeIsracard8, PKCardTypeIsracard9
+* PKCardNumber support for the new types
+* New resource for 'Isracard' logo
 
 ## Installation
 
@@ -33,7 +24,7 @@ In short, PaymentKit should greatly simplify your life when dealing with iOS pay
 
 [CocoaPods](http://cocoapods.org/) is a library dependency management tool for Objective-C. To use PaymentKit with CocoaPods, simply add the following to your Podfile and run pod install:
 
-    pod 'PaymentKit', :git => 'https://github.com/lmcd/PaymentKit.git'
+    pod 'PaymentKit', :git => 'https://github.com/orxelm/OEPaymentKit.git'
 
 ### Install by adding files to project
 
