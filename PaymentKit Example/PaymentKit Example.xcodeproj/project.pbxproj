@@ -17,6 +17,7 @@
 		16F3733B18756A5F00290ABF /* jcb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 16F3733A18756A5F00290ABF /* jcb@2x.png */; };
 		4C332B4E16FA923E009C782D /* PKTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C332B4D16FA923E009C782D /* PKTextField.m */; };
 		793A634B1CBD08CF00F88DE7 /* isracard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 793A634A1CBD08CF00F88DE7 /* isracard@2x.png */; };
+		793A634D1CBD104B00F88DE7 /* isracard@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 793A634C1CBD104B00F88DE7 /* isracard@3x.png */; };
 		FA007D1F16FA3B82006DD86E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA6F1A5916C19BF700835C75 /* QuartzCore.framework */; };
 		FA06D14C16AFC0AA00C46291 /* PKView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA06D14B16AFC0AA00C46291 /* PKView.m */; };
 		FA2A74A016BB1EDD00AF0078 /* PKCard.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2A749F16BB1EDD00AF0078 /* PKCard.m */; };
@@ -66,6 +67,7 @@
 		4C332B4C16FA923E009C782D /* PKTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PKTextField.h; sourceTree = "<group>"; };
 		4C332B4D16FA923E009C782D /* PKTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PKTextField.m; sourceTree = "<group>"; };
 		793A634A1CBD08CF00F88DE7 /* isracard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "isracard@2x.png"; sourceTree = "<group>"; };
+		793A634C1CBD104B00F88DE7 /* isracard@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "isracard@3x.png"; sourceTree = "<group>"; };
 		FA06D14A16AFC0AA00C46291 /* PKView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = PKView.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		FA06D14B16AFC0AA00C46291 /* PKView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PKView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		FA2A749E16BB1EDD00AF0078 /* PKCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = PKCard.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -228,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				FAA360F616C9F21C00049C6F /* amex.png */,
+				793A634C1CBD104B00F88DE7 /* isracard@3x.png */,
 				793A634A1CBD08CF00F88DE7 /* isracard@2x.png */,
 				FAA360F716C9F21C00049C6F /* amex@2x.png */,
 				16B159AE187A0376000D3033 /* amex-outline@2x.png */,
@@ -329,6 +332,7 @@
 				FAA3611116C9F21C00049C6F /* discover@2x.png in Resources */,
 				793A634B1CBD08CF00F88DE7 /* isracard@2x.png in Resources */,
 				FAA3611216C9F21C00049C6F /* jcb.png in Resources */,
+				793A634D1CBD104B00F88DE7 /* isracard@3x.png in Resources */,
 				FAA3611416C9F21C00049C6F /* mastercard.png in Resources */,
 				16B159B5187A0390000D3033 /* placeholder-outline@2x.png in Resources */,
 				FAA3611516C9F21C00049C6F /* mastercard@2x.png in Resources */,
