@@ -491,6 +491,12 @@
         case PKCardTypeVisa:
             cardTypeName = @"visa";
             break;
+        case PKCardTypeIsracard8:
+            cardTypeName = @"isracard";
+            break;
+        case PKCardTypeIsracard9:
+            cardTypeName = @"isracard";
+            break;
         default:
             break;
     }

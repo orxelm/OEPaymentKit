@@ -16,6 +16,8 @@ typedef enum {
     PKCardTypeDiscover,
     PKCardTypeJCB,
     PKCardTypeDinersClub,
+    PKCardTypeIsracard8,
+    PKCardTypeIsracard9,
     PKCardTypeUnknown
 } PKCardType;
 

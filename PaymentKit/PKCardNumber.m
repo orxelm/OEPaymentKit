@@ -27,20 +27,20 @@
     if (self) {
         // Strip non-digits
         number = [string stringByReplacingOccurrencesOfString:@"\\D"
-                                                    withString:@""
-                                                       options:NSRegularExpressionSearch
-                                                         range:NSMakeRange(0, string.length)];
+                                                   withString:@""
+                                                      options:NSRegularExpressionSearch
+                                                        range:NSMakeRange(0, string.length)];
     }
     return self;
 }
 
 - (PKCardType)cardType
-{    
+{
     if (number.length < 2) return PKCardTypeUnknown;
     
     NSString* firstChars = [number substringWithRange:NSMakeRange(0, 2)];
     
-    int range = [firstChars integerValue];
+    NSInteger range = [firstChars integerValue];
     
     if (range >= 40 && range <= 49) {
         return PKCardTypeVisa;
@@ -55,7 +55,12 @@
     } else if (range == 30 || range == 36 || range == 38 || range == 39) {
         return PKCardTypeDinersClub;
     } else {
-        return PKCardTypeUnknown;
+        if (number.length == 8) {
+            return PKCardTypeIsracard8;
+        }
+        else {
+            return PKCardTypeIsracard9;
+        }
     }
 }
 
@@ -96,9 +101,15 @@
     if ([self cardType] == PKCardTypeAmex) {
         regex = [NSRegularExpression regularExpressionWithPattern:@"(\\d{1,4})(\\d{1,6})?(\\d{1,5})?" options:0 error:NULL];
     } else if ([self cardType] == PKCardTypeDinersClub) {
-		regex = [NSRegularExpression regularExpressionWithPattern:@"(\\d{1,4})(\\d{1,6})?(\\d{1,4})?" options:0 error:NULL];
-	}
-	else {
+        regex = [NSRegularExpression regularExpressionWithPattern:@"(\\d{1,4})(\\d{1,6})?(\\d{1,4})?" options:0 error:NULL];
+    }
+    else if ([self cardType] == PKCardTypeIsracard8) {
+        regex = [NSRegularExpression regularExpressionWithPattern:@"(\\d{1,8})" options:0 error:NULL];
+    }
+    else if ([self cardType] == PKCardTypeIsracard9) {
+        regex = [NSRegularExpression regularExpressionWithPattern:@"(\\d{1,9})" options:0 error:NULL];
+    }
+    else {
         regex = [NSRegularExpression regularExpressionWithPattern:@"(\\d{1,4})" options:0 error:NULL];
     }
     
@@ -128,7 +139,11 @@
     if ([self isValidLength]) {
         return string;
     }
-
+    
+    if ([self cardType] == PKCardTypeIsracard8 || [self cardType] == PKCardTypeIsracard9) {
+        return string;
+    }
+    
     if ([self cardType] == PKCardTypeAmex) {
         regex = [NSRegularExpression regularExpressionWithPattern:@"^(\\d{4}|\\d{4}\\s\\d{6})$" options:0 error:NULL];
     } else {
@@ -157,22 +172,44 @@
 
 - (BOOL)isValidLuhn
 {
-    BOOL odd = true;
-    int sum  = 0;
+    
     NSMutableArray* digits = [NSMutableArray arrayWithCapacity:number.length];
     
     for (int i=0; i < number.length; i++) {
         [digits addObject:[number substringWithRange:NSMakeRange(i, 1)]];
     }
     
-    for (NSString* digitStr in [digits reverseObjectEnumerator]) {
-        int digit = [digitStr intValue];
-        if ((odd = !odd)) digit *= 2;
-        if (digit > 9) digit -= 9;
-        sum += digit;
+    if ([self cardType] == PKCardTypeIsracard8 || [self cardType] == PKCardTypeIsracard9) {
+        
+        if (number.length == 8) {
+            [digits insertObject:@"0" atIndex:0];
+        }
+        
+        NSArray *weights = [NSArray arrayWithObjects:[NSNumber numberWithInt:9], [NSNumber numberWithInt:8], [NSNumber numberWithInt:7],
+                            [NSNumber numberWithInt:6], [NSNumber numberWithInt:5], [NSNumber numberWithInt:4],
+                            [NSNumber numberWithInt:3],[NSNumber numberWithInt:2], [NSNumber numberWithInt:1],  nil];
+        
+        __block NSInteger sum = 0;
+        [digits enumerateObjectsUsingBlock:^(NSString *digitStr, NSUInteger idx, BOOL *stop) {
+            NSInteger digit = [digitStr integerValue];
+            sum += digit * ((NSNumber *)weights[idx]).integerValue;
+        }];
+        
+        return sum % 11 == 0;
     }
-    
-    return sum % 10 == 0;
+    else {
+        BOOL odd = true;
+        int sum  = 0;
+        
+        for (NSString* digitStr in [digits reverseObjectEnumerator]) {
+            int digit = [digitStr intValue];
+            if ((odd = !odd)) digit *= 2;
+            if (digit > 9) digit -= 9;
+            sum += digit;
+        }
+        
+        return sum % 10 == 0;
+    }
 }
 
 - (BOOL)isPartiallyValid
@@ -185,9 +222,17 @@
     NSInteger length;
     if (type == PKCardTypeAmex) {
         length = 15;
-    } else if (type == PKCardTypeDinersClub) {
+    }
+    else if (type == PKCardTypeDinersClub) {
         length = 14;
-    } else {
+    }
+    else if (type == PKCardTypeIsracard8) {
+        length = 8;
+    }
+    else if (type == PKCardTypeIsracard9) {
+        length = 9;
+    }
+    else {
         length = 16;
     }
     return length;
