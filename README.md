@@ -1,6 +1,7 @@
-# LMPaymentKit
+# OEPaymentKit
 
-LMPaymentKit is a fork of PaymentKit by Stripe - a utility library for writing payment forms in iOS apps. Development over there seems to have stopped, with PRs from contributors being ignored for nearly a year. I'll be picking up from where they left off here :)
+OEPaymentKit is a fork of LMPaymentKit which is a fork of PaymentKit by Stripe.
+@lmcd picked of where PaymentKit stopped, I just added support for 8&9 credit card number issued by Israeli credit card company 'Isracard'.
 
 Just add `PKView` to your application, and it'll take care accepting card numbers, expiry, cvc and zip.
 Alternatively, we've provided a bunch of classes that you can use yourself to add formatting, validation and restricting input of `UITextField`s.
